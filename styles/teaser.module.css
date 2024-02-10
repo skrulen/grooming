@@ -1,0 +1,61 @@
+.imageList {
+	display: flex;
+	gap: 5%;
+	padding: 1.5rem;
+	animation: teaser-row linear infinite 90s;
+	will-change: transform, opacity;
+	user-select: none;
+}
+
+.teaser {
+	background-color: #ffffff;
+  overflow-x: hidden;
+  border: 0.5px solid #0000ff;
+  border-radius: 50px;
+	width: 100%;
+}
+
+.image {
+	object-fit: cover;
+	max-height: clamp(250px, 20vh, 350px);
+	min-width: clamp(250px, 25vw, 350px);
+	border-radius: 20px;
+}
+
+@media (max-width: 768px) {
+	.imageList {
+		animation: teaser-row linear infinite 70s;
+	}
+
+	.image {
+		max-height: 45vh;
+		min-width: 30vh;
+		min-height: 50vw;
+	}
+}
+
+@media (max-width: 480px) {
+	.imageList {
+		animation: teaser-row linear infinite 45s;
+	}
+}
+
+@keyframes teaser-row {
+	0% {
+		opacity: 0%;
+		transform: translateX(0);
+	}
+
+	1% {
+		opacity: 100%;
+	}
+
+	99% {
+		opacity: 100%;
+	}
+
+	100% {
+		opacity: 0%;
+		transform: translateX(-250%);
+	}
+}
