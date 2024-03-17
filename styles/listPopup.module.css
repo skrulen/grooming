@@ -1,0 +1,31 @@
+.listPopupWrapper {
+	position: absolute;
+	margin-top: 2vh;
+	width: 100vw;
+	top: 90px;
+	transition: 300ms;
+}
+
+.listPopupActive {
+	opacity: 1;
+	transform: translate3d(0, 0px, 0);
+}
+
+.listPopupInactive {
+	pointer-events: none;
+	opacity: 0;
+	transform: translate3d(0, 100px, 0);
+}
+
+
+.listPopup {
+	background-color: #fafafa;
+
+	display: grid;
+	grid-template-columns: 40% 40%;
+	justify-content: space-around;
+	padding: 20px;
+	max-width: 50vw;
+	margin: auto;
+	border-radius: 20px;
+}
