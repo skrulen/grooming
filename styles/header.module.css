@@ -40,7 +40,7 @@
     display: flex;
     pointer-events: all;
     justify-content: center;
-    flex: 0 0 max(250px, calc(150px + 10vw));
+    flex: 0 0 300px;
 }
 
 .listElement {

@@ -23,17 +23,15 @@ export function Header() {
         setPopupActive(false);
     }
 
-
-    let [listPopupActive, setListPopupActive] = useState(false);
-
     const hovServices = useRef(null);
     const hovBreeds = useRef(null);
     const hovReviews = useRef(null);
-    const gap = useRef(null);
-    const listPopup = useRef(null);
+    const holdsServices = useRef(null);
+    const holdsBreeds = useRef(null);
+    const holdsReviews = useRef(null);
 
     function check() {
-        console.log(hovServices.current); // Обратите внимание на использование свойства .current
+        console.log(popupProps); // Обратите внимание на использование свойства .current
     }
 
     // const isMobile = (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent));
@@ -59,13 +57,49 @@ export function Header() {
          
     }
 
-    // turns off burger on resize window
     if (typeof window !== "undefined") {
         window.addEventListener('resize', () => {
             if (
                 (document.documentElement.clientWidth > 768) && burgerActive            
             ) changeBurgerActive();
         });
+    }
+    
+    const [popupProps, changePopupProps] = useState({
+        type: 'none',
+        links: [],
+        changesPopup: [hovServices, hovBreeds, hovReviews],
+        holdsPopup: []
+    });
+
+    function setServicesPopup() {
+        changePopupProps(prevState => ({
+            ...prevState,
+            type: 'services',
+            links: ['Груминг', 'Стрижка', 'Причесывание'],
+            changesPopup: [hovBreeds, hovReviews],
+            holdsPopup: [holdsServices, holdsBreeds, holdsReviews]
+        }))
+    }
+
+    function setBreedsPopup() {
+        changePopupProps(prevState => ({
+            ...prevState,
+            type: 'breeds',
+            links: ['Пудель', 'Далматинец', 'Ретривер', 'Овчарка', 'Такса', 'Пекинес', 'Мопс'],
+            changesPopup: [hovServices, hovReviews],
+            holdsPopup: [holdsBreeds],
+        }))
+    }
+
+    function setPopupHidden() {
+        changePopupProps(prevState => ({
+            ...prevState,
+            type: 'none',
+            links: [],
+            changesPopup: [hovServices, hovBreeds],
+            holdsPopup: [],
+        }))
     }
 
     return(
@@ -77,9 +111,9 @@ export function Header() {
             </div>
             <nav className={styles.middle}>
                 <ul className={styles.list}>
-                    <li className={styles.listElement}><div className={styles.hoverable} ref={hovServices}><span>Услуги</span></div></li>
-                    <li className={styles.listElement}><div className={styles.hoverable} ref={hovBreeds}><span>Породы</span></div></li>
-                    <li className={styles.listElement}><div className={styles.hoverable} ref={hovReviews}><span>Отзывы</span></div></li>
+                    <li className={styles.listElement} ref={holdsServices}><div className={styles.hoverable} onMouseEnter={setServicesPopup} ref={hovServices}><span>Услуги</span></div></li>
+                    <li className={styles.listElement} ref={holdsBreeds}><div className={styles.hoverable} onMouseEnter={setBreedsPopup} ref={hovBreeds}><span>Породы</span></div></li>
+                    <li className={styles.listElement} ref={holdsReviews}><div className={styles.hoverable} onMouseEnter={setPopupHidden} ref={hovReviews}><span>Отзывы</span></div></li>
                 </ul>
             </nav>
             <div className={styles.right}>
@@ -90,14 +124,9 @@ export function Header() {
                 <span className={` ${styles.line1} ${styles.line} ${burgerActive ? styles.active : '' } `}></span>
                 <span className={` ${styles.line2} ${styles.line} ${burgerActive ? styles.active : '' } `}></span>
             </div>
-            <ListPopup props={{
-                links: ["бульдог", "пес"],
-                activatesPopup: [hovServices, hovBreeds, hovReviews],
-                holdsPopup: []
-            }}/>
+            <ListPopup props={popupProps}/>
             
         </header>
-        <div className={styles.gap} ref={gap}></div>
 
         </div>
 

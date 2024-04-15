@@ -1,6 +1,6 @@
 .imageList {
 	display: flex;
-	gap: 5%;
+
 	padding: 1.5rem;
 	animation: teaser-row linear infinite 90s;
 	will-change: transform, opacity;
@@ -16,27 +16,41 @@
 }
 
 .image {
-	object-fit: cover;
-	max-height: clamp(250px, 20vh, 350px);
-	min-width: clamp(250px, 25vw, 350px);
 	border-radius: 20px;
+}
+
+@media (min-width: 769px) {
+	.imageList {
+		gap: 30px;
+	}
+
+	.image {
+		max-height: 20vw;
+		min-height: 20vw;
+		min-width: 30vw;
+		max-width: 30vw;
+	}
 }
 
 @media (max-width: 768px) {
 	.imageList {
 		animation: teaser-row linear infinite 70s;
+		gap: 50px;
 	}
 
 	.image {
-		max-height: 45vh;
-		min-width: 30vh;
-		min-height: 50vw;
+		max-height: 60vh;
+		min-height: 60vh;
+		min-width: 40vh;
+		max-width: 40vh;
 	}
 }
+
 
 @media (max-width: 480px) {
 	.imageList {
 		animation: teaser-row linear infinite 45s;
+		gap: 30px;
 	}
 }
 

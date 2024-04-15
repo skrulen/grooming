@@ -1,0 +1,63 @@
+.popupWrapper {
+	position: absolute;
+	margin-top: 2vh;
+	top: 90px;
+	transition: 300ms;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.popupActive {
+	opacity: 1;
+	transform: translate3d(0, -30px, 0);
+}
+
+.popupInactive {
+	pointer-events: none;
+	opacity: 0;
+	transform: translate3d(0, 20px, 0);
+}
+
+.popup {
+	background-color: #fafafa;
+	margin: auto;
+	border-radius: 20px;
+	padding: 20px;	
+	display: inline-flex;
+	flex-direction: column;
+}
+
+.popupList {
+	display: grid;
+	grid-template-columns: max(250px, 20vw) max(250px, 20vw);
+	justify-content: space-around;
+	max-width: 80vw;
+	grid-row-gap: 10px;
+  grid-column-gap: 20px;
+}
+
+.link {
+	height: 60px;
+	width: max(250px, 20vw) max(250px, 20vw);;
+	display: flex;
+	align-items: center;
+	background: #b3b3ff;
+	color: #00f;
+	border-radius: 20px;
+	padding: 0 20px;
+	cursor: pointer;
+	transition: border 100ms;
+	border: 2px solid #0000ff00;
+	user-select: none;
+}
+
+.link:active {
+	border: 2px solid #0000ff;
+}
+
+.popupList:last-child:not(:nth-last-child(2)) .link:last-child {
+  grid-column: span 2;
+	width: max(250px, 20vw);
+  justify-self: center;
+}

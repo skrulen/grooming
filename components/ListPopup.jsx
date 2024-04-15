@@ -1,66 +1,80 @@
 import Link from 'next/link';
-import styles from '@/styles/listPopup.module.css';
-import { useState, useEffect } from 'react';
+import styles from '@/styles/popup.module.css';
+import { useState, useRef, useEffect } from 'react';
 
 export function ListPopup({ props }) {
 
-	let [listPopup, setListPopup] = useState(false);
+	let [popupActive, setPopupActive] = useState(false);
+  const [currentLinks, setcurrentLinks] = useState([]);
+	const [currentType, setcurrentType] = useState('');
 
-  function showListPopup() {
-    setListPopup(true);
-		console.log('привет');
+	let holdsPopup;
+	const popup = useRef(null);
+
+  function showServices() {
+		setcurrentLinks(props.links);
+		setcurrentType(props.type);
+    setPopupActive(true);
+		popupHoveredHandle();
   }
 
-	function hideListPopup() {
-    setListPopup(false);
-		console.log('пока');
+	function showBreeds() {
+		setcurrentLinks(props.links);
+		setcurrentType(props.type);
+    setPopupActive(true);
+		popupHoveredHandle();
   }
 
-	const hovServices = props.activatesPopup[0];
+	function popupHoveredHandle() {
+		holdsPopup = props.holdsPopup.map(element => element.current);
+		holdsPopup.push(popup.current);
+		document.addEventListener('mouseover', hideOnNonHovered);
+	}
+
+	const hideOnNonHovered = (event) => {
+		let isHovered = event.relatedTarget !== null && 
+										holdsPopup.some(element => element && element.contains(event.target));
+
+		if (!isHovered) {
+			hidePopup();
+			document.removeEventListener('mouseover', hideOnNonHovered);
+		}
+
+	}
+
+	function hidePopup() {
+    setPopupActive(false);
+  }
 
 	useEffect(() => {
-		if (hovServices !== null) hovServices.current.addEventListener('mouseover', showListPopup);
-	}, [])
+		switch (props.type) {
+			case 'services': showServices(); break;
+			case 'breeds': showBreeds(); break;
+		}
+		
+	}, [props])
 
-	useEffect(() => {
-		if (hovServices !== null) hovServices.current.addEventListener('mouseout', hideListPopup);
-	}, [])
-	
-	console.log(listPopup)
+	function formList() {
+		let links;
+		if (props.type !== 'none' || !currentLinks) {
+			links = props.links.map((prop, index) => <li key={index} className={styles.link}><p>{ prop }</p></li>)
+		} else {
+			links = currentLinks.map((prop, index) => <li key={index} className={styles.link}><p>{ prop }</p></li>);
+		}
+
+		return (
+			<div className={styles.popup}>
+				<p className='mb-4 cursor-pointer self-start'>{ currentType === 'services' ? 'Все услуги' : 'Все породы' } →</p>
+				<ul className={styles.popupList}> 
+					{ links }
+				</ul>
+			</div>
+		)
+	}
 
 	return (
-		<div className={`${styles.listPopupWrapper} ${listPopup ? styles.listPopupActive : styles.listPopupInactive}`}>
-      <ul className={styles.listPopup}>
-				{ props.links.map((prop) => <li>{prop}</li>) }
-      </ul>
+		<div ref={popup} className={`${styles.popupWrapper} ${popupActive ? styles.popupActive : styles.popupInactive}`}>
+			{ formList() }
     </div>
 	)
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*	
-	const [hoverable, setHoverable] = useState(null);
-  const [listElement, setListElement] = useState(null);
-  const [gap, setGap] = useState(null);
-  const [popup, setPopup] = useState(null);
-
-  useEffect(() => {
-    setHoverable(document.querySelector('.hoverable'));
-    setListElement(document.querySelector('.listElement'));
-    setGap(document.querySelector('.gap'));
-    setPopup(document.querySelector('.listPopup'));
-		if (hoverable !== null) hoverable.addEventListener('mouseover', showListPopup);
-  }, []);
-	*/
-
