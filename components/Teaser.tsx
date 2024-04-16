@@ -6,7 +6,7 @@ export function ImageFeed() {
 
 	for (let i = 1; i <= 3; i++) {
 	for (let j = 1; j <= 9; j++) {
-		const key = 9*(j-1) + j-1;
+		const key = 9*(i-1) + j;
 		imageFeed.push(
 		<picture key={key}>
       <source media="(max-width: 768px)" srcSet={`/images/main/touch/groomer${j}.webp`} />
@@ -17,6 +17,7 @@ export function ImageFeed() {
         width={0}
         height={0}
 				className={styles.image}
+				priority={false}
 				loading="lazy"
       />
     </picture>)

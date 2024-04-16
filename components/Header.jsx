@@ -1,9 +1,9 @@
 'use client';
 
-import styles from '@/styles/header.module.css';
-import Link from 'next/link';
-import { ListPopup } from './ListPopup';
-import { useEffect, useState, useRef } from 'react';
+import styles from '@/styles/header.module.css'
+import Link from 'next/link'
+import { ListPopup } from './ListPopup'
+import { useEffect, useState, useRef } from 'react'
 
 export function Header() {
 
@@ -69,7 +69,7 @@ export function Header() {
         type: 'none',
         links: [],
         changesPopup: [hovServices, hovBreeds, hovReviews],
-        holdsPopup: []
+        holdsPopup: [holdsServices, holdsBreeds, holdsReviews]
     });
 
     function setServicesPopup() {
@@ -78,7 +78,6 @@ export function Header() {
             type: 'services',
             links: ['Груминг', 'Стрижка', 'Причесывание'],
             changesPopup: [hovBreeds, hovReviews],
-            holdsPopup: [holdsServices, holdsBreeds, holdsReviews]
         }))
     }
 
@@ -88,7 +87,6 @@ export function Header() {
             type: 'breeds',
             links: ['Пудель', 'Далматинец', 'Ретривер', 'Овчарка', 'Такса', 'Пекинес', 'Мопс'],
             changesPopup: [hovServices, hovReviews],
-            holdsPopup: [holdsBreeds],
         }))
     }
 
@@ -96,9 +94,7 @@ export function Header() {
         changePopupProps(prevState => ({
             ...prevState,
             type: 'none',
-            links: [],
             changesPopup: [hovServices, hovBreeds],
-            holdsPopup: [],
         }))
     }
 
@@ -107,13 +103,13 @@ export function Header() {
         <div className={styles.headerBox}>
         <header className={styles.header}>
             <div className={styles.left}>
-                <h1 className='text-[1.75rem]' onClick={check}>Logo</h1>
+                <Link href={'/'} className='text-[1.75rem]'>Logo</Link>
             </div>
             <nav className={styles.middle}>
                 <ul className={styles.list}>
-                    <li className={styles.listElement} ref={holdsServices}><div className={styles.hoverable} onMouseEnter={setServicesPopup} ref={hovServices}><span>Услуги</span></div></li>
-                    <li className={styles.listElement} ref={holdsBreeds}><div className={styles.hoverable} onMouseEnter={setBreedsPopup} ref={hovBreeds}><span>Породы</span></div></li>
-                    <li className={styles.listElement} ref={holdsReviews}><div className={styles.hoverable} onMouseEnter={setPopupHidden} ref={hovReviews}><span>Отзывы</span></div></li>
+                    <li className={styles.listElement} ref={holdsServices}><div className={styles.hoverable} onMouseEnter={setServicesPopup} ref={hovServices}><Link href='/services'>Услуги</Link></div></li>
+                    <li className={styles.listElement} ref={holdsBreeds}><div className={styles.hoverable} onMouseEnter={setBreedsPopup} ref={hovBreeds}><Link href='/breeds'>Породы</Link></div></li>
+                    <li className={styles.listElement} ref={holdsReviews}><div className={styles.hoverable} onMouseEnter={setPopupHidden} ref={hovReviews}><Link href='/reviews'>Отзывы</Link></div></li>
                 </ul>
             </nav>
             <div className={styles.right}>

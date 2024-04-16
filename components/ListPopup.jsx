@@ -7,11 +7,13 @@ export function ListPopup({ props }) {
 	let [popupActive, setPopupActive] = useState(false);
   const [currentLinks, setcurrentLinks] = useState([]);
 	const [currentType, setcurrentType] = useState('');
+	const [href, setHref] = useState('');
 
 	let holdsPopup;
 	const popup = useRef(null);
 
   function showServices() {
+		setHref('/services');
 		setcurrentLinks(props.links);
 		setcurrentType(props.type);
     setPopupActive(true);
@@ -19,6 +21,7 @@ export function ListPopup({ props }) {
   }
 
 	function showBreeds() {
+		setHref('/breeds');
 		setcurrentLinks(props.links);
 		setcurrentType(props.type);
     setPopupActive(true);
@@ -50,6 +53,7 @@ export function ListPopup({ props }) {
 		switch (props.type) {
 			case 'services': showServices(); break;
 			case 'breeds': showBreeds(); break;
+			case 'none': hidePopup(); break;
 		}
 		
 	}, [props])
@@ -64,7 +68,7 @@ export function ListPopup({ props }) {
 
 		return (
 			<div className={styles.popup}>
-				<p className='mb-4 cursor-pointer self-start'>{ currentType === 'services' ? 'Все услуги' : 'Все породы' } →</p>
+				<Link href={href} className='mb-4 cursor-pointer self-start'>{ currentType === 'services' ? 'Все услуги' : 'Все породы' } →</Link>
 				<ul className={styles.popupList}> 
 					{ links }
 				</ul>

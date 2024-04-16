@@ -1,11 +1,11 @@
 import { Header } from '@/components/Header'
 import styles from '@/styles/main.module.css'
-import { ImageFeed } from '@/components/Teaser';
+import { ImageFeed } from '@/components/Teaser'
 
 export default function Home() {
   return (
     <>
-      <Header />
+      
       <main className={styles.main}>
         
         <section className={styles.hero}>
