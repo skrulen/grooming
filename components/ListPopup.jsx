@@ -68,7 +68,7 @@ export function ListPopup({ props }) {
 
 		return (
 			<div className={styles.popup}>
-				<Link href={href} className='mb-4 cursor-pointer self-start'>{ currentType === 'services' ? 'Все услуги' : 'Все породы' } →</Link>
+				<Link href={href} className={styles.gotoAll}>{ currentType === 'services' ? 'Все услуги' : 'Все породы' } <span>→</span></Link>
 				<ul className={styles.popupList}> 
 					{ links }
 				</ul>

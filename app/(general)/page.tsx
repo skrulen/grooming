@@ -5,7 +5,6 @@ import { ImageFeed } from '@/components/Teaser'
 export default function Home() {
   return (
     <>
-      
       <main className={styles.main}>
         
         <section className={styles.hero}>

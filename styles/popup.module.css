@@ -61,3 +61,16 @@
 	width: max(250px, 20vw);
   justify-self: center;
 }
+
+.gotoAll {
+	margin-bottom: 16px;
+	align-self: flex-start;
+}
+
+.gotoAll > span {
+	transition: 350ms ease;
+}
+
+.gotoAll:hover > span {
+	transform: translateX(10px);
+}

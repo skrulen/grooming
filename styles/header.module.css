@@ -76,8 +76,13 @@
     }
 }
 
-.hoverable:hover > span {
+.hoverable:hover > div {
     animation: scroll 350ms ease;
+}
+
+.hoverable * {
+    display: flex;
+    flex: 1;
 }
 
 .right {
@@ -145,11 +150,11 @@
     z-index: 8;
     background:rgba(0,0,0,0);
     pointer-events: none;
-    transition: 200ms;
+    transition: 200ms ease;
 }
 
 .wrapper.active {
-    background:rgba(0,0,0,.8);
+    background: rgba(0,0,0,.8);
     pointer-events: all;
 }
 
