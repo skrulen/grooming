@@ -1,8 +1,16 @@
 import { Montserrat } from 'next/font/google'
-import { MinimalHeader } from '@/components/MinimalHeader'
-import '../globals.css'
+import './globals.css'
+import { Header } from '@/components/Header'
+import styles from './layout.module.css'
+import '@/components/Header'
+
 
 const montserrat = Montserrat({ subsets: ['latin', 'cyrillic'] });
+
+export const metadata = {
+  title: 'Груминг',
+  description: '',
+}
 
 export default function RootLayout({
   children,
@@ -11,8 +19,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ru">
-      <body>
-        <MinimalHeader />
+      <body className={montserrat.className}>
+        <Header />
         {children}
       </body>
     </html>

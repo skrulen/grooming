@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import styles from '@/styles/teaser.module.css'
 
-export function ImageFeed() {
+export const ImageFeed = function() {
 	let imageFeed: JSX.Element[] = [];
 
 	for (let i = 1; i <= 3; i++) {
