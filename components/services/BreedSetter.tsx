@@ -1,16 +1,21 @@
 'use client'
 
-import styles from '@/styles/services/main.module.css';
-import breedStore from '@/stores/BreedState';
-import { observer } from 'mobx-react-lite';
-import { useEffect, useState } from 'react';
-import { IoIosSearch } from 'react-icons/io';
-import breeds from '@/app/breedsPrices';
+import styles from '@/styles/services/main.module.css'
+import breedStore from '@/stores/BreedStore'
+import { observer } from 'mobx-react-lite'
+import { useEffect, useRef, useState } from 'react'
+import { IoIosSearch } from 'react-icons/io'
+import { breeds } from '@/app/breedsPrices'
 
 export const BreedSetter: React.FC = observer(() => {
-  const [searchTerm, setSearchTerm] = useState(''); // Состояние для поискового запроса
-  const [filteredBreeds, setFilteredBreeds] = useState<string[]>(Object.keys(breeds)); // Фильтрованный список пород
-  const { breed, setBreed } = breedStore;
+  const [searchTerm, setSearchTerm] = useState('')
+  const [filteredBreeds, setFilteredBreeds] = useState<string[]>(Object.keys(breeds))
+  const { breed, setBreed } = breedStore
+
+  const [isWindowShown, setWindowShown] = useState(false)
+
+  const wrapper = useRef<HTMLDivElement | null>(null);
+  const dialog = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -22,6 +27,25 @@ export const BreedSetter: React.FC = observer(() => {
   }, [setBreed]);
 
   useEffect(() => {
+    const handleClickOutside = (event: Event) => {
+      if (
+        wrapper.current &&
+        dialog.current &&
+        wrapper.current.contains(event.target as Node) &&
+        !dialog.current.contains(event.target as Node)
+      ) {
+        setWindowShown(false);
+      }
+    };
+
+    document.addEventListener('click', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, []);
+
+  useEffect(() => {
     const filtered = Object.keys(breeds).filter(breedName =>
       breedName.toLowerCase().includes(searchTerm.toLowerCase())
     );
@@ -30,33 +54,38 @@ export const BreedSetter: React.FC = observer(() => {
 
   return (
     <>
-      <div onClick={() => setBreed('Пекинес')}>
+      <div className={`${styles.selectBreedBtn} ${breed ? styles.breedSelected : styles.breedUnselected}`} onClick={() => setWindowShown(true)}>
         <span className='flex items-center justify-center'>
-          {breed || 'Выберите породу'}
+          { breed || 'Выберите породу' }
         </span>
       </div>
-      <div className={styles.wrapper}></div>
-      <div className={styles.breedsDialog}>
-        <div className={styles.searchBox}>
-          <IoIosSearch size={30} className={styles.searchIcon} />
-          <input
-            type="text"
-            className={styles.searchBreed}
-            placeholder='Введите название породы'
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
-        </div>
-        <div className={styles.breedList}>
-          {filteredBreeds.map((breedName) => (
-            <div
-              key={breedName}
-              className={styles.breedListElement}
-              onClick={() => setBreed(breedName)}
-            >
-              <span>{breedName}</span>
-            </div>
-          ))}
+      <div ref={wrapper} className={`${styles.wrapper} ${isWindowShown ? styles.wrapperActive : styles.wrapperInactive}`}></div>
+      <div ref={dialog} className={`${styles.dialogContainer} ${isWindowShown ? styles.pointerEventsAll : styles.pointerEventsNone}`}>
+        <div className={`${styles.breedsDialog} ${isWindowShown ? styles.dialogActive : styles.dialogInactive}`}>
+          <div className={`${styles.searchBox}`}>
+            <IoIosSearch size={30} className={styles.searchIcon} />
+            <input
+              type="text"
+              className={styles.searchBreed}
+              placeholder='Введите название породы'
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+          </div>
+          <div className={styles.breedList}>
+            {filteredBreeds.map((breedName: string) => (
+              <div
+                key={breedName}
+                className={styles.breedListElement}
+                onClick={() => {
+                  setBreed(breedName)
+                  setWindowShown(false)
+                }}
+              >
+                <span>{breedName}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </>

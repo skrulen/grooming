@@ -1,6 +1,6 @@
 import { action, makeAutoObservable } from 'mobx'
 
-class BreedState {
+class BreedStore {
   constructor() {
     makeAutoObservable(this)
   }
@@ -19,4 +19,4 @@ class BreedState {
 
 }
 
-export default new BreedState()
+export default new BreedStore()

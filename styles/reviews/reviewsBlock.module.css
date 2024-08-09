@@ -1,0 +1,47 @@
+.reviewsContainer {
+  margin-top: 4vh;
+}
+
+.review {
+  border: 1px solid #00f;
+  padding: 16px;
+  margin-bottom: 16px;
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+.top {
+  display: flex;
+  gap: 2%;
+  margin-bottom: 2%;
+  user-select: none;
+}
+
+.topRight {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.name {
+  font-weight: 600;
+  line-height: 1.2;
+  color: #00f;
+}
+
+.date {
+  color: #777;
+  line-height: 1.2;
+}
+
+.rating {
+  margin-top: 1.5%;
+  display: flex;
+  gap: 4px;
+}
+
+.avatar {
+  max-width: 50px;
+  border-radius: 50%;
+  pointer-events: none;
+}

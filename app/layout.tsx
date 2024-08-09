@@ -1,7 +1,6 @@
 import { Montserrat } from 'next/font/google'
 import './globals.css'
 import { Header } from '@/components/Header'
-import styles from './layout.module.css'
 import '@/components/Header'
 
 

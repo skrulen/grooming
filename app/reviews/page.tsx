@@ -1,5 +1,6 @@
-import styles from '@/styles/main.module.css'
+import styles from '@/styles/reviews/main.module.css'
 import '@/components/Header'
+import { ReviewsBlock } from '@/components/reviews/ReviewsBlock'
 
 export const metadata = {
   title: 'Груминг | Отзывы',
@@ -7,10 +8,12 @@ export const metadata = {
 }
 
 export default function Home() {
+
   return (
     <>
       <main className={styles.main}>
-        Отзывы
+        <h2 className='text-[#00f]'>Отзывы</h2>
+        <ReviewsBlock />
       </main>
     </>
   )

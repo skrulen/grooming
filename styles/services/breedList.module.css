@@ -1,0 +1,28 @@
+.block {
+  width: 100%;
+  border-radius: 20px;
+  border: 1px solid #00f;
+  margin: 10px 0;
+  overflow: hidden;
+  transition: all 250ms ease;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  background-color: #fff;
+  color: #00f;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: x-large;
+  user-select: none;
+}
+
+.description {
+  padding: 10px;
+  background-color: #fff;
+  font-weight: 600;
+  font-size: 18px;
+  border-top: #00f 1px solid;
+}

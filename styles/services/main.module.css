@@ -9,23 +9,65 @@
   width: 100vw;
   height: 100vh;
   background: #000000de;
+  transition: 300ms;
   z-index: 10;
 }
 
-.breedsDialog {
+.selectBreedBtn {
+  width: 90%;
+  margin: auto;
+  font-weight: 700;
+  padding: 20px 0;
+  font-size: x-large;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: 100ms;
+}
+
+.breedSelected {
+  background: #00f;
+  color: #fff;
+}
+
+.breedSelected:hover {
+  background: #0000db;
+  color: #fff;
+}
+
+.breedUnselected {
+  background: #757575;
+  color: #eeeeee;
+}
+
+.breedUnselected:hover {
+  background: #a0a0a0;
+  color: #eeeeee;
+}
+
+.dialogContainer {
   position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  z-index: 12;
+}
+
+.breedsDialog {
   background: #fff;
   border-radius: 50px;
   width: 40vw;
   min-width: 450px;
   height: 90vh;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
   overflow: hidden;
   z-index: 11;
   display: flex;
   flex-direction: column;
+  transition: 150ms ease;
 }
 
 .searchBox {
@@ -41,7 +83,6 @@
   font-weight: 600;
   border-bottom: rgb(0, 0, 255) 1px solid;
   background: #fff;
-  z-index: 12;
 }
 
 .searchIcon {
@@ -68,4 +109,37 @@
   width: 100%;
   padding: 20px 0;
   border-bottom: #b9b9b9 1px solid;
+  background: #fff;
+  cursor: pointer;
+  transition: 250ms;
+}
+
+.breedListElement:hover {
+  background-color: #d6d6ff;
+}
+
+.wrapperActive {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.wrapperInactive {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.dialogActive {
+  transform: scale(1);
+}
+
+.dialogInactive {
+  transform: scale(0);
+}
+
+.pointerEventsAll {
+  pointer-events: all;
+}
+
+.pointerEventsNone {
+  pointer-events: none;
 }
