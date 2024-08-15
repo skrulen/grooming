@@ -13,8 +13,8 @@ export default function Services() {
 
   return (
     <>
-      <BreedSetter />
       <main className={styles.main}>
+        <BreedSetter />
         <BreedList />
       </main>
     </>

@@ -1,8 +1,13 @@
+.breedList {
+  display: flex;
+  flex-direction: column;
+  gap: 2vh;
+}
+
 .block {
   width: 100%;
   border-radius: 20px;
-  border: 1px solid #00f;
-  margin: 10px 0;
+  background: #fff;
   overflow: hidden;
   transition: all 250ms ease;
 }
@@ -25,4 +30,23 @@
   font-weight: 600;
   font-size: 18px;
   border-top: #00f 1px solid;
+}
+
+@media (max-width: 768px) {
+  .header {
+    font-size: clamp(10px, 4vw, 26px);
+  }
+
+  .description {
+    font-size: clamp(7px, 3vw, 20px);
+  }
+
+  .block {
+    padding: 0;
+  }
+
+  .header {
+    padding: 4%;
+  }
+
 }

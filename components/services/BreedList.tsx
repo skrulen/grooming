@@ -21,12 +21,12 @@ export const BreedList: React.FC = observer(() => {
   };
 
   return (
-    <div>
+    <div className={styles.breedList}>
       {Object.entries(breedComplexes).map(([complexName, price]) => (
         <div key={complexName} className={styles.block}>
           <div className={styles.header} onClick={() => toggleDescription(complexName)}>
             <span>{ complexName }</span>
-            <span>{ price !== null ? `${price}₽` : "Недоступно" }</span>
+            <span className='ml-[6%]'>{ price !== null ? `${price}₽` : "Недоступно" }</span>
           </div>
           {activeComplex === complexName && (
             <div className={styles.description}>

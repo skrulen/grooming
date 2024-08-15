@@ -5,6 +5,7 @@ import breedStore from '@/stores/BreedStore'
 import { observer } from 'mobx-react-lite'
 import { useEffect, useRef, useState } from 'react'
 import { IoIosSearch } from 'react-icons/io'
+import { RxCross1 } from "react-icons/rx";
 import { breeds } from '@/app/breedsPrices'
 
 export const BreedSetter: React.FC = observer(() => {
@@ -56,14 +57,14 @@ export const BreedSetter: React.FC = observer(() => {
     <>
       <div className={`${styles.selectBreedBtn} ${breed ? styles.breedSelected : styles.breedUnselected}`} onClick={() => setWindowShown(true)}>
         <span className='flex items-center justify-center'>
-          { breed || 'Выберите породу' }
+          {breed || 'Выберите породу'}
         </span>
       </div>
       <div ref={wrapper} className={`${styles.wrapper} ${isWindowShown ? styles.wrapperActive : styles.wrapperInactive}`}></div>
       <div ref={dialog} className={`${styles.dialogContainer} ${isWindowShown ? styles.pointerEventsAll : styles.pointerEventsNone}`}>
         <div className={`${styles.breedsDialog} ${isWindowShown ? styles.dialogActive : styles.dialogInactive}`}>
           <div className={`${styles.searchBox}`}>
-            <IoIosSearch size={30} className={styles.searchIcon} />
+            <IoIosSearch size={24} className={styles.searchIcon} />
             <input
               type="text"
               className={styles.searchBreed}
@@ -71,6 +72,9 @@ export const BreedSetter: React.FC = observer(() => {
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
+            <button onClick={()=>setWindowShown(false)} className={styles.cross}>
+              <RxCross1 size={26} className='text-black'/>
+            </button>
           </div>
           <div className={styles.breedList}>
             {filteredBreeds.map((breedName: string) => (
