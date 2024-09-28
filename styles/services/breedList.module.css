@@ -38,7 +38,7 @@
   }
 
   .description {
-    font-size: clamp(7px, 3vw, 20px);
+    font-size: clamp(7px, 4vw, 20px);
   }
 
   .block {

@@ -11,7 +11,7 @@ export const BreedList: React.FC = observer(() => {
   const [activeComplex, setActiveComplex] = useState<string | null>(null);
   
   if (!breed || !breeds[breed]) {
-    return <div>Выберите породу</div>;
+    return <span className='font-bold text-center w-full text-2xl text-gray-700 mt-[4vw]'>Выберите породу</span>;
   }
 
   const breedComplexes = breeds[breed];

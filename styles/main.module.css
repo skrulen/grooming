@@ -1,3 +1,7 @@
+.main {
+  background: #fff;  
+}
+
 .main > :first-child {
   max-width: 1650px;
   margin-left: auto;

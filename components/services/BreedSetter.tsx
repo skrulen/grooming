@@ -55,15 +55,15 @@ export const BreedSetter: React.FC = observer(() => {
 
   return (
     <>
-      <div className={`${styles.selectBreedBtn} ${breed ? styles.breedSelected : styles.breedUnselected}`} onClick={() => setWindowShown(true)}>
-        <span className='flex items-center justify-center'>
+      <div className={`${styles.selectBreedBtn} ${breed ? styles.breedSelected : styles.breedUnselected}`} onClick={() => {setWindowShown(true); setSearchTerm('')}}>
+        <span className='flex items-center justify-center text-center'>
           {breed || 'Выберите породу'}
         </span>
       </div>
       <div ref={wrapper} className={`${styles.wrapper} ${isWindowShown ? styles.wrapperActive : styles.wrapperInactive}`}></div>
       <div ref={dialog} className={`${styles.dialogContainer} ${isWindowShown ? styles.pointerEventsAll : styles.pointerEventsNone}`}>
         <div className={`${styles.breedsDialog} ${isWindowShown ? styles.dialogActive : styles.dialogInactive}`}>
-          <div className={`${styles.searchBox}`}>
+          <div className={`${styles.searchBox} ${styles.topSearchBox}`}>
             <IoIosSearch size={24} className={styles.searchIcon} />
             <input
               type="text"
@@ -89,6 +89,19 @@ export const BreedSetter: React.FC = observer(() => {
                 <span>{breedName}</span>
               </div>
             ))}
+          </div>
+          <div className={`${styles.searchBox} ${styles.bottomSearchBox}`}>
+            <IoIosSearch size={24} className={styles.searchIcon} />
+            <input
+              type="text"
+              className={styles.searchBreed}
+              placeholder='Введите название породы'
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+            <button onClick={()=>setWindowShown(false)} className={styles.cross}>
+              <RxCross1 size={26} className='text-black'/>
+            </button>
           </div>
         </div>
       </div>
