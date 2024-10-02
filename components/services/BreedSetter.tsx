@@ -18,6 +18,26 @@ export const BreedSetter: React.FC = observer(() => {
   const wrapper = useRef<HTMLDivElement | null>(null);
   const dialog = useRef<HTMLDivElement | null>(null);
 
+  const [active, setActive] = useState(true); // Начальное значение active - true
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const handleScroll = () => {
+        console.log('window.innerWidth <= 768 = ', window.innerWidth <= 768);
+        console.log('document.body.scrollTop === 0 = ', document.body.scrollTop === 0);
+        if (window.innerWidth <= 768) {
+          setActive(document.body.scrollTop === 0);
+        }
+      };
+  
+      window.addEventListener('scroll', handleScroll, { passive: true, capture: true});
+  
+      return () => {
+        window.removeEventListener('scroll', handleScroll);
+      };
+    }
+  }, []);
+
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const storedBreed = localStorage.getItem('breed');
@@ -55,7 +75,7 @@ export const BreedSetter: React.FC = observer(() => {
 
   return (
     <>
-      <div className={`${styles.selectBreedBtn} ${breed ? styles.breedSelected : styles.breedUnselected}`} onClick={() => {setWindowShown(true); setSearchTerm('')}}>
+      <div className={`${styles.selectBreedBtn} ${breed ? styles.breedSelected : styles.breedUnselected} ${active ? styles.active : styles.inactive}`} onClick={() => {setWindowShown(true); setSearchTerm('')}}>
         <span className='flex items-center justify-center text-center'>
           {breed || 'Выберите породу'}
         </span>

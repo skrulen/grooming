@@ -1,5 +1,6 @@
 .main {
   padding: 5vmin;
+  height: calc(200svh - 90px);
   width: 100%;
 }
 
@@ -22,8 +23,18 @@
   font-size: x-large;
   border-radius: 30px;
   cursor: pointer;
-  transition: 100ms;
+  transition: 500ms ease;
   margin-bottom: 5vh;
+}
+
+.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.inactive {
+  opacity: 0;
+  pointer-events: none;
 }
 
 @media (max-width: 768px) {
@@ -116,6 +127,10 @@
 }
 
 @media (max-width: 768px) {
+  .main {
+    height: calc(100svh - 60px);
+  }
+
   .breedsDialog {
     width: 100vw;
     height: 100svh;

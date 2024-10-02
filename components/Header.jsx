@@ -5,7 +5,7 @@ import { useState, useRef } from 'react'
 import { ListPopup } from './ListPopup'
 import Link from 'next/link'
 import { observer } from 'mobx-react-lite';
-
+import Image from 'next/image';
 
 export const Header = observer(() => {
 
@@ -14,18 +14,6 @@ export const Header = observer(() => {
     const changeBurgerActive = () => {
         setBurgerActive(!burgerActive);
     }
-
-    {/** 
-    let [popupActive, setPopupActive] = useState(false);
-
-    const changePopupActive = () => {
-        setPopupActive(!popupActive);
-    }
-
-    const setPopupInActive = () => {
-        setPopupActive(false);
-    }
-*/}
 
     //  Hack, but it works
     const hovServices = useRef(null);
@@ -39,30 +27,6 @@ export const Header = observer(() => {
             }
         });
     }
-
-    {/*
-    const isMobile = (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent));
-
-    let [time, changeTime] = useState(5);
-
-    const numberHandle = () => {
-        navigator.clipboard.writeText('+79962245301')
-        if (!popupActive) {
-            changePopupActive();
-
-            let timer = setInterval(() => {
-                changeTime(--time);
-                console.log(time);
-            }, 1000);
-
-            setTimeout(() => { 
-                setPopupInActive();
-                clearInterval(timer);
-                changeTime(5);
-            }, 5000);     
-        }  
-    }
-*/}
 
     if (typeof window !== 'undefined') {
         window.addEventListener('resize', () => {
@@ -102,7 +66,17 @@ export const Header = observer(() => {
             <div className={styles.headerBox}>
                 <header className={styles.header}>
                     <div className={styles.left}>
-                        <Link href={'/'} className='text-[1.75rem]'>Logo</Link>
+                        <Link href={'/'} className='h-full flex justify-center items-center'>
+                            <Image
+                                src="/fullLogo.webp"
+                                alt="Description of the image"
+                                width={100}
+                                height={100}
+                                priority={false}
+                                loading="lazy"
+                                className={styles.logo}
+                            />
+                        </Link>
                     </div>
                     <nav className={styles.middle}>
                         <ul className={styles.list}>
@@ -111,7 +85,6 @@ export const Header = observer(() => {
                         </ul>
                     </nav>
                     <div className={styles.right}>
-                        {/*<Link className='text-[#00f] transition-colors hover:text-[#000099] m-2' href={"tel:+79962245301"} onClick={numberHandle}>+7 996 224 53-01</Link>*/}
                         <button className={styles.action}><Link href={'https://link.tetradka.io/box/71486'}>Записаться</Link></button>
                     </div>
                     <div className={styles.burger} onClick={changeBurgerActive}>
@@ -125,10 +98,7 @@ export const Header = observer(() => {
             </div>
 
             {/*
-        <div className={`${styles.popup} ${popupActive ? styles.popupActive : styles.popupInactive}`}>
-            <div className="text-[#000093] w-[30px] h-[30px]">{time}</div>
-            <p>Номер скопирован</p>
-        </div>
+        
 */}
 
             <div className={` ${styles.wrapper} ${burgerActive ? styles.active : ''} `} onClick={changeBurgerActive}></div>

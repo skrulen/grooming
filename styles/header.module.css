@@ -5,7 +5,7 @@
 .header { 
     padding: 0 5%;
     height: 90px;
-    background: #fff;
+    background: #ffffff;
     width: 100vw;
     color: #00f;
     display: flex;
@@ -20,6 +20,12 @@
     gap: 50px;
     align-items: center;
     margin-right: auto;
+    height: 100%;
+}
+
+.logo {
+    width: unset;
+    height: 80%;
 }
 
 .middle {
@@ -213,31 +219,6 @@
     margin: auto;
 }
 
-.popup {
-    position: fixed;
-    bottom: 20px;
-    left: 20px;
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    padding: 20px 30px;
-    background-color: #f2f2f2;
-    border: 1px #ccc solid;
-    border-radius: 20px;
-    color: #000033;
-    font-size: 20px;
-    font-weight: 700;
-}
-
-.popupActive {
-    transition: 150ms;
-    transform: (-110px);
-}
-
-.popupInactive {
-    transform: translateY(110px);
-}
-
 @media (min-width: 769px) {
     .burger, .menu {
         display: none;
@@ -255,8 +236,8 @@
     .header {
         font-size: 20px;
         position: fixed;
-        height: 60px;
         bottom: 0;
+        height: 60px;
     }
 
     .gap {
