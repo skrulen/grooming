@@ -23,8 +23,7 @@ export const BreedSetter: React.FC = observer(() => {
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const handleScroll = () => {
-        console.log('window.innerWidth <= 768 = ', window.innerWidth <= 768);
-        console.log('document.body.scrollTop === 0 = ', document.body.scrollTop === 0);
+        console.log('window.scrollY', window.scrollY);
         if (window.innerWidth <= 768) {
           setActive(document.body.scrollTop === 0);
         }
@@ -92,7 +91,7 @@ export const BreedSetter: React.FC = observer(() => {
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
-            <button onClick={()=>setWindowShown(false)} className={styles.cross}>
+            <button onClick={() => {setWindowShown(false); document.body.scrollBy(0,-500)}} className={styles.cross}>
               <RxCross1 size={26} className='text-black'/>
             </button>
           </div>
@@ -104,6 +103,7 @@ export const BreedSetter: React.FC = observer(() => {
                 onClick={() => {
                   setBreed(breedName)
                   setWindowShown(false)
+                  document.body.scrollBy(0,-500)
                 }}
               >
                 <span>{breedName}</span>
