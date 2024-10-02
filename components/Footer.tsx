@@ -2,7 +2,7 @@
 import styles from '@/styles/footer.module.css';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export function Footer() {
   let [popupActive, setPopupActive] = useState(false);
@@ -13,13 +13,18 @@ export function Footer() {
   const setPopupInActive = () => {
     setPopupActive(false);
   };
+  const [isMobile, setIsMobile] = useState(false);
 
-  const isMobile = (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent));
+  useEffect(() => {
+    if (typeof window !== "undefined" && typeof navigator !== "undefined") {
+      setIsMobile(/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent));
+    }
+  }, []);
 
   let [time, changeTime] = useState(5);
 
   const numberHandle = () => {
-    if (isMobile) return;
+    if (isMobile && typeof navigator !== "undefined") return;
     navigator.clipboard.writeText('+79026927051');
     if (!popupActive) {
       changePopupActive();
