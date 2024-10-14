@@ -6,7 +6,7 @@ import { Footer } from '@/components/Footer'
 const montserrat = Montserrat({ subsets: ['latin', 'cyrillic'] });
 
 export const metadata = {
-  title: 'Груминг',
+  title: 'Молли - Сургут',
   description: '',
 }
 
